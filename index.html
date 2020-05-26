@@ -16,14 +16,25 @@
 
     const testManager = new ABTest.default()
 
-    testManager.createTest('header', [
+    const headerTest = testManager.createTest('header', [
         {
+            name: 'Blue header',
             weight: .6
         },
         {
+            name: 'Red header',
             weight: .4
         }
     ])
+
+    headerTest.test(
+        () => {
+            console.log('do blue header');
+        },
+        () => {
+            console.log('do red header');
+        }
+    )
 
 
 </script>

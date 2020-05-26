@@ -1,4 +1,4 @@
-import {ITest, ITestField, ITestFieldAdapter} from "../../types";
+import {Callback, ITest, ITestField, ITestFieldAdapter} from "../../types";
 
 export default class Test implements ITest {
     private static id_: number = 0
@@ -18,8 +18,20 @@ export default class Test implements ITest {
         this.fields = fields.map((field: ITestField) => this.parseField(field))
 
         this.activeField = this.findActiveField(this.fields)
+    }
 
-        console.log(this)
+    test(...cb: Callback<undefined, void>[]): void {
+        const indexActiveField = this.fields
+            .findIndex(
+                (field: ITestFieldAdapter) => field.name === this.activeField.name
+            )
+
+        console.log(indexActiveField);
+        if (indexActiveField !== -1 && cb[indexActiveField] !== undefined) {
+            cb[indexActiveField]()
+        }
+
+        console.error(`Can not find active field`)
     }
 
     protected findActiveField(fields: ITestFieldAdapter[]): ITestFieldAdapter {
