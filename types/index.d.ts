@@ -6,10 +6,12 @@ export interface ITestField {
     weight?: number
     /**
      * @default index of Field
-     * @description
+     * @description Name used in metrics
      */
     name?: string
 }
+
+export type Callback<T, U> = (value?: T) => U
 
 export interface ITestFieldAdapter extends ITestField{
     weight: number
@@ -23,7 +25,7 @@ export interface ITestManager {
 export interface ITest {
     readonly id: number
     readonly name: string
-    test(...)
+    test(...cb: Callback<undefined, void>[]): void
 }
 
 import {Test} from "../src/index";
