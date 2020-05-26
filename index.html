@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="app">
+        <div>{{ age }}</div>
+    </div>
+
+<script src="dist/ABTest.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.common.dev.js"></script>
+<script>
+
+    const testManager = new ABTest.default()
+
+    testManager.createTest('header', [
+        {
+            weight: .6
+        },
+        {
+            weight: .4
+        }
+    ])
+
+
+</script>
+</body>
+</html>
