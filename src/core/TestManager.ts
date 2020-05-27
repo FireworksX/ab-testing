@@ -1,5 +1,6 @@
-import {ITest, ITestField, ITestManager} from "../../types";
+import {ICacheTest, ITest, ITestField, ITestManager} from "../../types";
 import Test from "./Test";
+import CacheTest from "../modules/CacheTest";
 
 export default class TestManager implements ITestManager {
 
@@ -19,6 +20,13 @@ export default class TestManager implements ITestManager {
 
     createTest(name: string, fields: ITestField[]): ITest {
         const newTest = new Test(name, fields)
+        this.testStore[name] = newTest
+
+        return newTest
+    }
+
+    createCacheTest(name: string, fields: ITestField[]): ICacheTest {
+        const newTest = new CacheTest(name, fields)
         this.testStore[name] = newTest
 
         return newTest
